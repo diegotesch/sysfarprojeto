@@ -1,0 +1,39 @@
+version: '3'
+
+networks:
+  sysfar:
+    driver: bridge
+
+volumes:
+  sysfardatav1:
+    driver: local
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: sysfar_db
+    volumes:
+      - sysfardatav1:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=sysfar
+      - MYSQL_DATABASE=sysfardb
+      - MYSQL_USER=sysfar
+      - MYSQL_PASSWORD=sysfar
+    networks:
+      - sysfar
+  
+  app:
+    image: diegotesch/phplaravelcli:0.1
+    container_name: sysfar_api
+    volumes:
+      - ./api:/app
+    ports:
+      - "8000:8000"
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      - sysfar
