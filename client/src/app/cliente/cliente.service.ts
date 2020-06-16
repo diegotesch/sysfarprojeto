@@ -17,7 +17,7 @@ export class ClienteService {
     private http: HttpClient
   ) { }
 
-  public listar(): Observable<any> {
-    return this.http.get(`${this.api}`);
+  public listar(filtro: string = ''): Observable<any> {
+    return this.http.get(`${this.api}${filtro}`);
   }
 }

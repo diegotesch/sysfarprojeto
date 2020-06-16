@@ -10,7 +10,7 @@ import { PasswordModule } from 'primeng/password';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 
-import { BlockModule } from './../shared/block/block.module'
+import { BlockModule } from './../shared/block/block.module';
 
 import { LoginComponent } from './login.component';
 

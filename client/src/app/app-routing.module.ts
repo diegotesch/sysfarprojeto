@@ -10,9 +10,9 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'clientes', component: ClienteListComponent },
-  { path: 'cliente', component: ClienteFormComponent },
-  { path: 'cliente/:id', component: ClienteFormComponent },
+  { path: 'clientes', component: ClienteListComponent, canActivate: [AuthGuardService] },
+  { path: 'cliente', component: ClienteFormComponent, canActivate: [AuthGuardService] },
+  { path: 'cliente/:id', component: ClienteFormComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({

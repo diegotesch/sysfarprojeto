@@ -13,6 +13,7 @@ import { AuthInterceptor } from './services/auth/auth.interceptor';
 
 import { ClienteModule } from './cliente/cliente.module';
 import { LoginModule } from './login/login.module';
+import { BlockModule } from './shared/block/block.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +32,7 @@ import { AppComponent } from './app.component';
     ToastModule,
     ClienteModule,
     LoginModule,
+    BlockModule,
     AppRoutingModule
   ],
   providers: [

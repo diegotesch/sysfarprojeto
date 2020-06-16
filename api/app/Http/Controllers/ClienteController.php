@@ -9,12 +9,22 @@ use App\Http\Resources\ClienteDTO;
 class ClienteController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::all();
+        $query = Cliente::query();
+
+        if ($request->has('nome')) {
+            $query->where('nome', 'LIKE', '%' . $request->nome . '%');
+        }
+
+        if ($request->has('data_nascimento')) {
+            $query->where('data_nascimento', $request->data_nascimento);
+        }
+
+        $clientes = $query->paginate();
+
         return response([
-            'clientes' => ClienteDTO::collection($clientes),
-            'message' => 'Clientes listados com sucesso'
+            $clientes
         ], 200);
     }
 

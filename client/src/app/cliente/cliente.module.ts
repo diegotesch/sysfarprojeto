@@ -9,14 +9,19 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import {CalendarModule} from 'primeng/calendar';
+import {InputMaskModule} from 'primeng/inputmask';
+
+import { BlockModule } from './../shared/block/block.module';
 
 import { ClienteListComponent } from './cliente-list/cliente-list.component';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
+import { PhonePipe } from './../pipes/phone.pipe';
 
 
 
 @NgModule({
-  declarations: [ClienteListComponent, ClienteFormComponent],
+  declarations: [ClienteListComponent, ClienteFormComponent, PhonePipe],
   imports: [
     CommonModule,
     FormsModule,
@@ -28,6 +33,9 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
     InputTextModule,
     MessagesModule,
     MessageModule,
+    BlockModule,
+    CalendarModule,
+    InputMaskModule
   ]
 })
 export class ClienteModule { }
