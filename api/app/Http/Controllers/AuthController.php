@@ -32,7 +32,11 @@ class AuthController extends Controller
         ]);
 
         if (!auth()->attempt($validarDados)) {
-            return response(['message' => 'Credenciais Inválidas']);
+            return response([
+                'title' => 'Credenciais Inválidas',
+                'message' => 'Não foi possível realizar a autenticação',
+                'error' => true
+                ]);
         }
 
         $accessToken = auth()->user()->createToken('authToken')->accessToken;

@@ -1,0 +1,29 @@
+<ng-container *ngIf="clientes$ | async as clientes; else loading">
+  <p-table [value]="clientes" selectionMode="multiple" dataKey="id" (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnSelect($event)">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Idade</th>
+        <th>Telefone</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cliente>
+      <tr [pSelectableRow]="cliente">
+        <td>{{cliente.nome}}</td>
+        <td>{{cliente.email}}</td>
+        <td>{{cliente.idade}}</td>
+        <td>{{cliente.telefone}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>
+
+<ng-template #loading>
+  <div class="ui-g-12 loading">
+    <div class="ui-g-2 ui-g-offset-5">
+      <p><i class="pi pi-spin pi-spinner" style="font-size: 3em"></i></p>
+      <p>Carregando Clientes...</p>
+    </div>
+  </div>
+</ng-template>
