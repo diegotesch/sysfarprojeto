@@ -20,11 +20,12 @@ export class ClienteListComponent implements OnInit {
   clientes$: Observable<Cliente[]>;
   requisicao = false;
   filtro: Filtro = new Filtro();
+  btVisualizar: boolean = false;
+  selecionado: number = null;
 
   constructor(
     private clienteService: ClienteService,
     private router: Router,
-    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -71,12 +72,22 @@ export class ClienteListComponent implements OnInit {
     this.listarClientes(busca);
   }
 
-  rowSelect() {
-
+  rowSelect(e) {
+    this.btVisualizar = true;
+    this.selecionado = e.data.id;
   }
 
   rowUnSelect() {
+    this.btVisualizar = false;
+    this.selecionado = null;
+  }
 
+  cadastrar() {
+    this.router.navigate(['cliente']);
+  }
+
+  visualizar() {
+    this.router.navigate(['cliente', this.selecionado]);
   }
 
 }

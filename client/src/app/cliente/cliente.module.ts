@@ -17,11 +17,11 @@ import { BlockModule } from './../shared/block/block.module';
 import { ClienteListComponent } from './cliente-list/cliente-list.component';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { PhonePipe } from './../pipes/phone.pipe';
-
+import { PhoneDirective } from './../directives/phone.directive';
 
 
 @NgModule({
-  declarations: [ClienteListComponent, ClienteFormComponent, PhonePipe],
+  declarations: [ClienteListComponent, ClienteFormComponent, PhonePipe, PhoneDirective],
   imports: [
     CommonModule,
     FormsModule,

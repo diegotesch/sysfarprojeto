@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\ClienteDTO;
 
-class ClienteController extends Controller
+class ClienteController extends BaseController
 {
 
     public function index(Request $request)
@@ -30,21 +32,55 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+
+        $validator = Validator::make($dados, [
+            'nome'  => 'required|min:3',
+            'email' => 'required|email'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Dados inválidos.', $validator->errors());
+        }
+
+        $cliente = Cliente::create($dados);
+
+        return $this->sendResponse(new ClienteDTO($cliente), 'Cliente cadastrado com sucesso!');
     }
 
-    public function show(Cliente $cliente)
+    public function show($id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+        if (!$cliente) {
+            return $this->sendError('Cliente não encontrado');
+        }
+
+        return $this->sendResponse(new ClienteDTO($cliente), 'Cliente recuperado com sucesso!');
     }
 
-    public function update(Request $request, Cliente $cliente)
+    public function update(Request $request)
     {
-        //
+        $dados = $request->all();
+        $cliente = Cliente::findOrFail($dados['id']);
+
+        $validator = Validator::make($dados, [
+            'nome'  => 'required|min:3',
+            'email' => 'required|email'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->sendError('Dados inválidos.', $validator->errors());
+        }
+
+        $cliente->update($dados);
+        return $this->sendResponse(new ClienteDTO($cliente), 'Cliente atualizado com sucesso!');
     }
 
     public function destroy(Cliente $cliente)
     {
-        //
+        $cliente->delete();
+
+        return $this->sendResponse([], 'Cliente removido com sucesso!');
     }
 }

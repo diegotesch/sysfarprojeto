@@ -1,5 +1,5 @@
 <app-block [show]="requisicao"></app-block>
-<div class="p-grid forms-grid login">
+<div class="p-grid forms-grid lista">
   <div class="p-offset-1 p-col-10">
     <p-card header="Listagem de Clientes" subheader="clientes" styleClass="ui-card-shadow">
 
@@ -33,35 +33,44 @@
         </div>
       </div>
 
-      <ng-container *ngIf="clientes$ | async as clientes; else loading">
-        <p-table [paginator]="true" [rows]="10" [value]="clientes" selectionMode="multiple" dataKey="id" (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnSelect($event)">
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Nome</th>
-              <th>Email</th>
-              <th>Idade</th>
-              <th>Telefone</th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-cliente>
-            <tr [pSelectableRow]="cliente">
-              <td>{{cliente.nome}}</td>
-              <td>{{cliente.email}}</td>
-              <td>{{getIdade(cliente.data_nascimento)}}</td>
-              <td>{{cliente.telefone | phone}}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </ng-container>
+      <div class="p-grid">
+        <div class="p-col-11">
+          <ng-container *ngIf="clientes$ | async as clientes; else loading">
+            <p-table [paginator]="true" [rows]="10" [value]="clientes" selectionMode="single" dataKey="id" (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnSelect($event)">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Idade</th>
+                  <th>Telefone</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-cliente>
+                <tr [pSelectableRow]="cliente">
+                  <td>{{cliente.nome}}</td>
+                  <td>{{cliente.email}}</td>
+                  <td>{{getIdade(cliente.data_nascimento)}}</td>
+                  <td>{{cliente.telefone | phone}}</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </ng-container>
 
-      <ng-template #loading>
-        <div class="ui-g-12 loading">
-          <div class="ui-g-2 ui-g-offset-5">
-            <p><i class="pi pi-spin pi-spinner" style="font-size: 3em"></i></p>
-            <p>Carregando Clientes...</p>
-          </div>
+          <ng-template #loading>
+            <div class="ui-g-12 loading">
+              <div class="ui-g-2 ui-g-offset-5">
+                <p><i class="pi pi-spin pi-spinner" style="font-size: 3em"></i></p>
+                <p>Carregando Clientes...</p>
+              </div>
+            </div>
+          </ng-template>
         </div>
-      </ng-template>
+        <div class="p-col-1">
+          <button pButton type="button" icon="pi pi-plus" class="ui-button-success ui-button-raised ui-button-rounded actionButton" (click)="cadastrar()" pTooltip="Cadastrar Cliente" tooltipPosition="top"></button>
+          <button pButton type="button" icon="pi pi-eye" class="ui-button-info ui-button-raised ui-button-rounded actionButton" [ngClass]="{'esmaecer' : !btVisualizar}" (click)="visualizar()" pTooltip="Visualizar Cliente Selecionado" tooltipPosition="top"></button>
+        </div>
+      </div>
+
 
     </p-card>
   </div>
