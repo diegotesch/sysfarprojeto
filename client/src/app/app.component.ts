@@ -24,4 +24,9 @@ export class AppComponent implements OnInit{
     }
   }
 
+  sair() {
+    this.token.logout();
+    window.location.reload();
+  }
+
 }

@@ -7,5 +7,8 @@ export class Cliente {
     public telefone?: string,
     public idade?: number,
     public data_nascimento?: Date
-  ) {}
+  ) {
+    this.telefone = null;
+    this.data_nascimento = null;
+  }
 }

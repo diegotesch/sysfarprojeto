@@ -21,6 +21,7 @@ export class ClienteListComponent implements OnInit {
   requisicao = false;
   filtro: Filtro = new Filtro();
   btVisualizar: boolean = false;
+  loading: boolean = false;
   selecionado: number = null;
 
   constructor(
@@ -32,14 +33,16 @@ export class ClienteListComponent implements OnInit {
     this.onRefresh();
   }
 
+
   listarClientes(filtro: string = '') {
     this.clientes$ = this.clienteService.listar(filtro)
-      .pipe(tap(console.log), map(res => {
-        return res[0].data
-      }));
+      .pipe(tap(), map(res => res[0]));
   }
 
   getIdade(data) {
+    if (!data) {
+      return;
+    }
     let hoje = new Date;
     let nascimento = new Date(data);
     let idade = hoje.getFullYear() - nascimento.getFullYear();
@@ -64,8 +67,6 @@ export class ClienteListComponent implements OnInit {
       busca += `data_nascimento=${this.filtro.nascimento.getFullYear()}-${this.filtro.nascimento.getMonth()+1}-${this.filtro.nascimento.getDate()}`
     }
 
-    this.filtro = new Filtro();
-
     if (busca) {
       busca = '?' + busca;
     }
@@ -89,5 +90,16 @@ export class ClienteListComponent implements OnInit {
   visualizar() {
     this.router.navigate(['cliente', this.selecionado]);
   }
+
+  dataBr = {
+    firstDayOfWeek: 1,
+    dayNames: ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"],
+    dayNamesShort: ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"],
+    dayNamesMin: ["D", "S", "T", "Q", "Q", "S", "S"],
+    monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+    monthNamesShort: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
+    today: 'Hoje',
+    clear: 'Limpar'
+  };
 
 }

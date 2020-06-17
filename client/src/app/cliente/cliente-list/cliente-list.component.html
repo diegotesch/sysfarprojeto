@@ -18,7 +18,10 @@
               <div class="p-col2" style="margin-left: 1em;">
                 <div class="p-field ui-fluid">
                   <span class="ui-float-label">
-                    <p-calendar [yearNavigator]="true" yearRange="1960:2040" [readonlyInput]="true" [(ngModel)]="filtro.nascimento" [ngModelOptions]="{standalone: true}"></p-calendar>
+                    <p-calendar  [showButtonBar]="true" [yearNavigator]="true" yearRange="1960:2080" [locale]="dataBr"
+                    [readonlyInput]="true" [(ngModel)]="filtro.nascimento"  [ngModelOptions]="{standalone: true}" [showIcon]="true"
+                     dateFormat="dd/mm/yy">
+                    </p-calendar>
                     <label for="float-input">Data de Aniversário:</label>
                   </span>
                 </div>
@@ -36,7 +39,8 @@
       <div class="p-grid">
         <div class="p-col-11">
           <ng-container *ngIf="clientes$ | async as clientes; else loading">
-            <p-table [paginator]="true" [rows]="10" [value]="clientes" selectionMode="single" dataKey="id" (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnSelect($event)">
+
+            <p-table [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [value]="clientes" selectionMode="single" dataKey="id" (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnSelect($event)">
               <ng-template pTemplate="header">
                 <tr>
                   <th>Nome</th>
@@ -49,7 +53,7 @@
                 <tr [pSelectableRow]="cliente">
                   <td>{{cliente.nome}}</td>
                   <td>{{cliente.email}}</td>
-                  <td>{{getIdade(cliente.data_nascimento)}}</td>
+                  <td>{{getIdade(cliente.data_nascimento) || 'N/A'}}</td>
                   <td>{{cliente.telefone | phone}}</td>
                 </tr>
               </ng-template>

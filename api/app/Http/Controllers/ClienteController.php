@@ -24,7 +24,7 @@ class ClienteController extends BaseController
             $query->where('data_nascimento', $request->data_nascimento);
         }
 
-        $clientes = $query->paginate();
+        $clientes = $query->get();
 
         return response([
             $clientes

@@ -4,16 +4,10 @@ networks:
   sysfar:
     driver: bridge
 
-volumes:
-  sysfardatav1:
-    driver: local
-
 services:
   db:
     image: mysql:5.7
     container_name: sysfar_db
-    volumes:
-      - sysfardatav1:/var/lib/mysql
     ports:
       - 3306:3306
     environment:

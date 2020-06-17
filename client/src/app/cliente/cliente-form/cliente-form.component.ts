@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';
 
-import { tap, finalize } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 
 import { FormDefaultComponent } from './../../shared/form-default-component';
 import { ClienteService } from './../cliente.service';
@@ -22,6 +22,7 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
   visualizar: boolean = false;
   editar: boolean = false;
   titulo: string = 'Cadastro de Clientes'
+  labelButtonSalvar: string = 'Salvar';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,12 +37,13 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
     this.activeRoute.params.subscribe(rota => {
       if (rota['id']) {
         this.visualizar = true;
+        this.labelButtonSalvar = 'Alterar';
         this.requisicao = true;
         this.clienteService.obterPorId(rota['id'])
           .pipe(finalize(() => this.requisicao = false))
           .subscribe(cliente => {
             this.cliente = cliente.data;
-            this.cliente.data_nascimento = new Date(this.cliente.data_nascimento);
+            this.cliente.data_nascimento = this.cliente.data_nascimento ? new Date(this.cliente.data_nascimento) : null;
             this.titulo = `Registro de Cliente: ${this.cliente.nome}`;
             this.disableForm();
           })
@@ -66,7 +68,8 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
   salvar() {
     if (this.validarFormulario()) {
       this.requisicao = true;
-      this.cliente.telefone = this.cliente.telefone.replace(/\D/g, '');
+      this.limparTelefone();
+      console.log(this.cliente);
       this.clienteService.salvar(this.cliente)
         .pipe(finalize(() => this.requisicao = false))
         .subscribe(res => this.router.navigate(['clientes']))
@@ -111,12 +114,22 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
     }
   }
 
-  checkMascara() {
-    let val = this.cliente.telefone.replace(/\D/g, '');
-    if (val.length < 10) {
-     this.cliente.telefone = '';
+  limparTelefone() {
+    if (!this.cliente.telefone) {
+      this.cliente.telefone = null;
+      return;
     }
+    this.checkMascara();
+    this.cliente.telefone = this.cliente.telefone.replace(/\D/g, '');
+  }
 
+  checkMascara() {
+    if (this.cliente.telefone) {
+      let val = this.cliente.telefone.replace(/\D/g, '');
+      if (val.length < 10) {
+        this.cliente.telefone = '';
+      }
+    }
   }
 
 }

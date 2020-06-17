@@ -8,7 +8,7 @@
     <h2>Sistema Gerenciador de Clientes</h2>
   </div>
   <div class="p-col-fixed logout" *ngIf="exibirLogout">
-    <button pButton type="button" class="ui-button-warning " icon="pi pi-sign-out" pTooltip="Sair" tooltipPosition="left"></button>
+    <button pButton type="button" class="ui-button-warning " icon="pi pi-sign-out" pTooltip="Sair" (click)="sair()" tooltipPosition="left"></button>
   </div>
 </div>
 
