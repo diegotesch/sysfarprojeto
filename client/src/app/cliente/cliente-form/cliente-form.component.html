@@ -1,7 +1,7 @@
 <app-block [show]="requisicao"></app-block>
 <div class="p-grid forms-grid card">
   <div class="p-offset-2 p-col-8">
-    <p-card header="Área de Membros" subheader="LOGIN" styleClass="ui-card-shadow">
+    <p-card header="{{titulo}}" subheader="CLIENTES" styleClass="ui-card-shadow">
       <form [formGroup]="formulario">
         <div class="ui-fluid">
           <div class="p-field ui-fluid">
@@ -49,8 +49,27 @@
       </form>
 
       <p-footer>
-        <div class="ui-fluid">
-          <button pButton type="button" label="Salvar" (click)="salvar()"></button>
+        <div class="p-grid">
+          <div class="p-col-4" *ngIf="!visualizar">
+            <div class="p-field ui-fluid">
+              <button pButton type="button" label="Alterar" (click)="salvar()"></button>
+            </div>
+          </div>
+          <div class="p-col-4" *ngIf="visualizar">
+            <div class="p-field ui-fluid">
+              <button pButton type="button" label="Editar Cliente" (click)="editarCliente()"></button>
+            </div>
+          </div>
+          <div class="p-col-4">
+            <div class="p-field ui-fluid">
+              <button pButton type="button" label="Excluir" (click)="excluir()"></button>
+            </div>
+          </div>
+          <div class="p-col-4">
+            <div class="p-field ui-fluid">
+              <button pButton type="button" label="Cancelar" (click)="cancelar()"></button>
+            </div>
+          </div>
         </div>
       </p-footer>
     </p-card>

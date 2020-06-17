@@ -15,7 +15,7 @@ class ClientesSeeder extends Seeder
         $faker = \Faker\Factory::create();
 
         for($i = 0; $i < 20; $i++){
-            $phone = $i % 2 == 0 ? '1111111111' : '11111111111';
+            $phone = rand(10, 11);
             Cliente::create([
                 'nome' => $faker->name,
                 'email' => $faker->email,

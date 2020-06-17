@@ -1,8 +1,14 @@
 <p-toast></p-toast>
 
-<div class="p-grid p-nogutter topo" style="height: 100px;">
-  <div class="p-col-12">
-
+<div class="p-grid p-nogutter topo">
+  <div class="p-2 sigla">
+    <h1>SGC</h1>
+  </div>
+  <div class="p-col titulo">
+    <h2>Sistema Gerenciador de Clientes</h2>
+  </div>
+  <div class="p-col-fixed logout" *ngIf="exibirLogout">
+    <button pButton type="button" class="ui-button-warning " icon="pi pi-sign-out" pTooltip="Sair" tooltipPosition="left"></button>
   </div>
 </div>
 

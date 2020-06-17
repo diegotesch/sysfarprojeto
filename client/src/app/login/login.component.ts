@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder } from '@angular/forms';
 
+import { finalize } from 'rxjs/operators';
+
 import { FormDefaultComponent } from './../shared/form-default-component';
 import { Login } from './../models/Login';
 import { LoginService } from './login.service';
@@ -44,8 +46,8 @@ export class LoginComponent extends FormDefaultComponent implements OnInit {
     this.requisicao = true;
     if (this.validarFormulario()) {
       this.loginService.entrar(this.credenciais)
+        .pipe(finalize(() => this.requisicao = false))
         .subscribe(res => {
-          this.requisicao = false;
           let { access_token, user } = res;
           this.tokenService.saveToken(access_token);
           this.tokenService.saveUser(user);

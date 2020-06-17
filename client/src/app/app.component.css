@@ -1,3 +1,28 @@
 .topo {
   background-color: #000 !important;
+  height: 100px;
+}
+
+.sigla,
+.titulo {
+  color: #fff !important;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sigla h1 {
+  font-size: 5em;
+  margin: 0.1em 0.2em;
+}
+
+.titulo {
+  text-align: center;
+  line-height: 3em;
+}
+
+.logout {
+  width: 50px;
+}
+
+.logout>button {
+  margin: 2em 0;
 }

@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\ClienteDTO;
+use Carbon\Carbon;
 
 class ClienteController extends BaseController
 {
@@ -43,6 +44,10 @@ class ClienteController extends BaseController
             return $this->sendError('Dados inválidos.', $validator->errors());
         }
 
+        if ($dados['data_nascimento']) {
+            $dados['data_nascimento'] = Carbon::parse($dados['data_nascimento']);
+        }
+
         $cliente = Cliente::create($dados);
 
         return $this->sendResponse(new ClienteDTO($cliente), 'Cliente cadastrado com sucesso!');
@@ -71,6 +76,10 @@ class ClienteController extends BaseController
 
         if ($validator->fails()) {
             return $this->sendError('Dados inválidos.', $validator->errors());
+        }
+
+        if ($dados['data_nascimento']) {
+            $dados['data_nascimento'] = Carbon::parse($dados['data_nascimento']);
         }
 
         $cliente->update($dados);

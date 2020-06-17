@@ -6,7 +6,9 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-import {ToastModule} from 'primeng/toast'
+import {ToastModule} from 'primeng/toast';
+import {ButtonModule} from 'primeng/button';
+import {TooltipModule} from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';
 
 import { AuthInterceptor } from './services/auth/auth.interceptor';
@@ -30,6 +32,8 @@ import { AppComponent } from './app.component';
     MessagesModule,
     MessageModule,
     ToastModule,
+    ButtonModule,
+    TooltipModule,
     ClienteModule,
     LoginModule,
     BlockModule,
