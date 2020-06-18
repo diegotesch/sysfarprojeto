@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 
-class AuthController extends Controller
+class AuthController extends BaseController
 {
     public function cadastro(Request $request)
     {

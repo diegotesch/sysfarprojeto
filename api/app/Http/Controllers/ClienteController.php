@@ -50,7 +50,7 @@ class ClienteController extends BaseController
 
         $cliente = Cliente::create($dados);
 
-        return $this->sendResponse(new ClienteDTO($cliente), 'Cliente cadastrado com sucesso!');
+        return $this->sendResponse(new ClienteDTO($cliente), 'Cliente cadastrado com sucesso!', 201);
     }
 
     public function show($id)
@@ -58,7 +58,7 @@ class ClienteController extends BaseController
         $cliente = Cliente::find($id);
 
         if (!$cliente) {
-            return $this->sendError('Cliente não encontrado');
+            return $this->sendError('Cliente não encontrado', 404);
         }
 
         return $this->sendResponse(new ClienteDTO($cliente), 'Cliente recuperado com sucesso!');
@@ -90,6 +90,6 @@ class ClienteController extends BaseController
     {
         $cliente->delete();
 
-        return $this->sendResponse([], 'Cliente removido com sucesso!');
+        return $this->sendResponse([], 'Cliente removido com sucesso!', 204);
     }
 }

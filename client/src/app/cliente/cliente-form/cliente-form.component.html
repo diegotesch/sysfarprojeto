@@ -60,7 +60,7 @@
               <button pButton type="button" class="ui-button-info" label="Editar Cliente" (click)="editarCliente()"></button>
             </div>
           </div>
-          <div class="p-col-4">
+          <div class="p-col-4" *ngIf="cliente.id">
             <div class="p-field ui-fluid">
               <button pButton type="button" class="ui-button-danger" label="Excluir" (click)="excluir()"></button>
             </div>
