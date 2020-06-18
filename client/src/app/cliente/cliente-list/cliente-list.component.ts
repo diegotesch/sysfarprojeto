@@ -78,7 +78,7 @@ export class ClienteListComponent implements OnInit {
     this.selecionado = e.data.id;
   }
 
-  rowUnSelect() {
+  rowUnSelect(e) {
     this.btVisualizar = false;
     this.selecionado = null;
   }

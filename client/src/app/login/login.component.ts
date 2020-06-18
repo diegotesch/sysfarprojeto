@@ -52,7 +52,7 @@ export class LoginComponent extends FormDefaultComponent implements OnInit {
           this.tokenService.saveToken(access_token);
           this.tokenService.saveUser(user);
 
-          window.location.reload();
+          this.router.navigate(['clientes']);
         })
     }
   }

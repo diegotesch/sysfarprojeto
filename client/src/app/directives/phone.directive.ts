@@ -4,7 +4,7 @@ import { NgControl } from '@angular/forms';
 @Directive({
   selector: '[ngModel][phone]',
   host: {
-    '(ngModelChange)': 'onInputChange($event)',
+    '(ngModelChange)': 'onInputChange($event, false)',
     '(keydown.backspace)': 'onInputChange($event.target.value, true)'
   }
 })

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { TokenStorageService } from './services/auth/token-storage.service';
@@ -12,7 +13,8 @@ export class AppComponent implements OnInit{
   exibirLogout: boolean = false;
 
   constructor(
-    private token: TokenStorageService
+    private token: TokenStorageService,
+    private router: Router
   ) {
 
   }
@@ -26,7 +28,7 @@ export class AppComponent implements OnInit{
 
   sair() {
     this.token.logout();
-    window.location.reload();
+    this.router.navigate(['/']);
   }
 
 }
