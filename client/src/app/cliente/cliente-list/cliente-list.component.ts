@@ -44,7 +44,7 @@ export class ClienteListComponent implements OnInit {
       return;
     }
     let hoje = new Date;
-    let nascimento = new Date(data);
+    let nascimento = new Date(`${data}T10:30:00-03:00`);
     let idade = hoje.getFullYear() - nascimento.getFullYear();
     if (new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate()) <
         new Date(hoje.getFullYear(), nascimento.getMonth(), nascimento.getDate())){

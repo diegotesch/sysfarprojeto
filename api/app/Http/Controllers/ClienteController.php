@@ -17,7 +17,7 @@ class ClienteController extends BaseController
         $query = Cliente::query();
 
         if ($request->has('nome')) {
-            $query->where('nome', 'LIKE', '%' . $request->nome . '%');
+            $query->where('nome', 'LIKE', '%'.$request->nome.'%');
         }
 
         if ($request->has('data_nascimento')) {

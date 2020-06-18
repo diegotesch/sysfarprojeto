@@ -43,7 +43,7 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
           .pipe(finalize(() => this.requisicao = false))
           .subscribe(cliente => {
             this.cliente = cliente.data;
-            this.cliente.data_nascimento = this.cliente.data_nascimento ? new Date(this.cliente.data_nascimento) : null;
+            this.cliente.data_nascimento = this.cliente.data_nascimento ? new Date(`${this.cliente.data_nascimento}T10:30:00-03:00`) : null;
             this.titulo = `Registro de Cliente: ${this.cliente.nome}`;
             this.disableForm();
           })
