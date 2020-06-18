@@ -28,7 +28,7 @@ export class AppComponent implements OnInit{
 
   sair() {
     this.token.logout();
-    this.router.navigate(['/']);
+    window.location.reload();
   }
 
 }
