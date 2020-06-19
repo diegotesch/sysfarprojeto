@@ -35,16 +35,21 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
 
   ngOnInit() {
     this.activeRoute.params.subscribe(rota => {
-      if (rota['id']) {
-        this.visualizar = true;
+      let { id, v } = rota;
+      if (id || v) {
+        let clienteId = id ? id : v;
+        this.visualizar = v;
         this.labelButtonSalvar = 'Alterar';
         this.requisicao = true;
-        this.clienteService.obterPorId(rota['id'])
+        this.clienteService.obterPorId(clienteId)
           .pipe(finalize(() => this.requisicao = false))
           .subscribe(cliente => {
             this.cliente = cliente.data;
             this.cliente.data_nascimento = this.cliente.data_nascimento ? new Date(`${this.cliente.data_nascimento}T10:30:00-03:00`) : null;
-            this.titulo = `Registro de Cliente: ${this.cliente.nome}`;
+            this.titulo = `Registro do cliente: ${this.cliente.nome}`;
+            if (id) {
+              this.titulo = `Atualizar dados do cliente: ${this.cliente.nome}`;
+            }
             this.disableForm();
           })
       }
@@ -61,15 +66,11 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
     });
   }
 
-  maskComplete() {
-    console.log(this.cliente.telefone);
-  }
 
   salvar() {
     if (this.validarFormulario()) {
       this.requisicao = true;
       this.limparTelefone();
-      console.log(this.cliente);
       this.clienteService.salvar(this.cliente)
         .pipe(finalize(() => this.requisicao = false))
         .subscribe(res => this.router.navigate(['clientes']))
@@ -88,7 +89,6 @@ export class ClienteFormComponent extends FormDefaultComponent implements OnInit
 
   excluir() {
     this.requisicao = true;
-    console.log('remover');
     this.clienteService.remover(this.cliente.id)
       .subscribe(res => {
         this.requisicao = false;

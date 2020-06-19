@@ -43,8 +43,9 @@ export class LoginComponent extends FormDefaultComponent implements OnInit {
   }
 
   login() {
-    this.requisicao = true;
+
     if (this.validarFormulario()) {
+      this.requisicao = true;
       this.loginService.entrar(this.credenciais)
         .pipe(finalize(() => this.requisicao = false))
         .subscribe(res => {

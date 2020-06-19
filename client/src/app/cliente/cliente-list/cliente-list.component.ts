@@ -21,6 +21,7 @@ export class ClienteListComponent implements OnInit {
   requisicao = false;
   filtro: Filtro = new Filtro();
   btVisualizar: boolean = false;
+  btEditar: boolean = false;
   loading: boolean = false;
   selecionado: number = null;
 
@@ -75,11 +76,13 @@ export class ClienteListComponent implements OnInit {
 
   rowSelect(e) {
     this.btVisualizar = true;
+    this.btEditar = true;
     this.selecionado = e.data.id;
   }
 
   rowUnSelect(e) {
     this.btVisualizar = false;
+    this.btEditar = false;
     this.selecionado = null;
   }
 
@@ -88,7 +91,15 @@ export class ClienteListComponent implements OnInit {
   }
 
   visualizar() {
-    this.router.navigate(['cliente', this.selecionado]);
+    if (this.btVisualizar) {
+      this.router.navigate(['cliente', 'view', this.selecionado]);
+    }
+  }
+
+  editar() {
+    if (this.btEditar) {
+      this.router.navigate(['cliente', this.selecionado]);
+    }
   }
 
   dataBr = {

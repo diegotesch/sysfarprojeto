@@ -20,7 +20,7 @@ Baixe o repositório contendo os arquivos do projeto:
 
 Acesse o diretorio do projeto e execute os comandos abaixo:
 
-	$ cd sysfarprojeto
+	$ cd sysfarprojeto/api
 
 	$ cp .env.example .env
 
@@ -44,5 +44,5 @@ url:
 
 Dados para acesso:
 		
-		Usuário: usuário@teste.com.br
+		Usuário: usuario@teste.com.br
 		Senha:   123456

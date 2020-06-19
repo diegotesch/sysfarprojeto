@@ -1,26 +1,26 @@
 version: '3'
 
 networks:
-  sysfar:
+  sgc-net:
     driver: bridge
 
 services:
   db:
     image: mysql:5.7
-    container_name: sysfar_db
+    container_name: sgc_db
     ports:
       - 3306:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=sysfar
-      - MYSQL_DATABASE=sysfardb
-      - MYSQL_USER=sysfar
-      - MYSQL_PASSWORD=sysfar
+      - MYSQL_ROOT_PASSWORD=sgc
+      - MYSQL_DATABASE=sgcdb
+      - MYSQL_USER=sgc
+      - MYSQL_PASSWORD=sgc123
     networks:
-      - sysfar
+      - sgc-net
   
   app:
     image: diegotesch/phplaravelcli:0.1
-    container_name: sysfar_api
+    container_name: sgc_api
     volumes:
       - ./api:/app
     ports:
@@ -30,4 +30,4 @@ services:
     depends_on:
       - db
     networks:
-      - sysfar
+      - sgc-net

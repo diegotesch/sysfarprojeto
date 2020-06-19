@@ -49,12 +49,21 @@
                   <th>Telefone</th>
                 </tr>
               </ng-template>
+
               <ng-template pTemplate="body" let-cliente>
                 <tr [pSelectableRow]="cliente">
                   <td>{{cliente.nome}}</td>
                   <td>{{cliente.email}}</td>
                   <td>{{getIdade(cliente.data_nascimento) || 'N/A'}}</td>
                   <td>{{cliente.telefone | phone}}</td>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td class="vazia" [attr.colspan]="4">
+                    Nenhum Registro cadastrado.
+                  </td>
                 </tr>
               </ng-template>
             </p-table>
@@ -72,6 +81,7 @@
         <div class="p-col-1">
           <button pButton type="button" icon="pi pi-plus" class="ui-button-success ui-button-raised ui-button-rounded actionButton" (click)="cadastrar()" pTooltip="Cadastrar Cliente" tooltipPosition="top"></button>
           <button pButton type="button" icon="pi pi-eye" class="ui-button-info ui-button-raised ui-button-rounded actionButton" [ngClass]="{'esmaecer' : !btVisualizar}" (click)="visualizar()" pTooltip="Visualizar Cliente Selecionado" tooltipPosition="top"></button>
+          <button pButton type="button" icon="pi pi-pencil" class="ui-button-warning ui-button-raised ui-button-rounded actionButton" [ngClass]="{'esmaecer' : !btEditar}" (click)="editar()" pTooltip="Editar Cliente Selecionado" tooltipPosition="top"></button>
         </div>
       </div>
 

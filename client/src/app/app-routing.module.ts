@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'clientes', component: ClienteListComponent, canActivate: [AuthGuardService] },
   { path: 'cliente', component: ClienteFormComponent, canActivate: [AuthGuardService] },
   { path: 'cliente/:id', component: ClienteFormComponent, canActivate: [AuthGuardService] },
+  { path: 'cliente/view/:v', component: ClienteFormComponent, canActivate: [AuthGuardService] },
 ];
 
 @NgModule({
