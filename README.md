@@ -26,6 +26,8 @@ Acesse o diretorio do projeto e execute os comandos abaixo:
 
 	$ docker-compose up -d
 
+>Aguarde alguns segundos até que os containers subam corretamente.
+
 	$ docker-compose run --rm app composer install
 
 	$ docker-compose run --rm app php artisan key:generate
