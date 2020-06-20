@@ -26,3 +26,19 @@
 .logout>button {
   margin: 2em 0;
 }
+
+@media screen and (max-width: 700px) {
+  .sigla h1 {
+    font-size: 3em;
+    margin: 0.6em 0.2em;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .sigla {
+    display: none;
+  }
+  .titulo {
+    line-height: 2em;
+  }
+}

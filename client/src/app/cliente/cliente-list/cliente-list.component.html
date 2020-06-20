@@ -37,16 +37,16 @@
       </div>
 
       <div class="p-grid">
-        <div class="p-col-11">
+        <div class="p-col-11 p-sm-10 p-md-10 p-lg-11">
           <ng-container *ngIf="clientes$ | async as clientes; else loading">
 
-            <p-table [paginator]="true" [rows]="10" [showCurrentPageReport]="true" [value]="clientes" selectionMode="single" dataKey="id" (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnSelect($event)">
+            <p-table [paginator]="true" [resizableColumns]="true" [responsive]="true" [rows]="10" [showCurrentPageReport]="true" [value]="clientes" selectionMode="single" dataKey="id" (onRowSelect)="rowSelect($event)" (onRowUnselect)="rowUnSelect($event)">
               <ng-template pTemplate="header">
                 <tr>
                   <th>Nome</th>
                   <th>Email</th>
-                  <th>Idade</th>
-                  <th>Telefone</th>
+                  <th class="ui-p-4">Idade</th>
+                  <th class="ui-p-3">Telefone</th>
                 </tr>
               </ng-template>
 
@@ -54,8 +54,8 @@
                 <tr [pSelectableRow]="cliente">
                   <td>{{cliente.nome}}</td>
                   <td>{{cliente.email}}</td>
-                  <td>{{getIdade(cliente.data_nascimento) || 'N/A'}}</td>
-                  <td>{{cliente.telefone | phone}}</td>
+                  <td class="ui-p-4">{{getIdade(cliente.data_nascimento) || 'N/A'}}</td>
+                  <td class="ui-p-3">{{cliente.telefone | phone}}</td>
                 </tr>
               </ng-template>
 
@@ -78,7 +78,7 @@
             </div>
           </ng-template>
         </div>
-        <div class="p-col-1">
+        <div class="p-col-1 p-sm-2 p-md-2 p-lg-1">
           <button pButton type="button" icon="pi pi-plus" class="ui-button-success ui-button-raised ui-button-rounded actionButton" (click)="cadastrar()" pTooltip="Cadastrar Cliente" tooltipPosition="top"></button>
           <button pButton type="button" icon="pi pi-eye" class="ui-button-info ui-button-raised ui-button-rounded actionButton" [ngClass]="{'esmaecer' : !btVisualizar}" (click)="visualizar()" pTooltip="Visualizar Cliente Selecionado" tooltipPosition="top"></button>
           <button pButton type="button" icon="pi pi-pencil" class="ui-button-warning ui-button-raised ui-button-rounded actionButton" [ngClass]="{'esmaecer' : !btEditar}" (click)="editar()" pTooltip="Editar Cliente Selecionado" tooltipPosition="top"></button>
